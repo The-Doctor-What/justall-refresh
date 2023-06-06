@@ -1,0 +1,19 @@
+.text {
+    color: var(--light-gray);
+    font-weight: bold;
+    text-align: center;
+}
+
+.errorSection {
+    background-color: var(--dark-gray);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem;
+    width: 400px;
+}
+
+@media (max-width: 530px) {
+    .errorSection {
+        width: 300px;
+    }
+}
