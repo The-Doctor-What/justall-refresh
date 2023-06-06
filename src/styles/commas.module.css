@@ -1,0 +1,14 @@
+.commas {
+    text-align: center;
+    width: 90%;
+}
+
+.commas span {
+    text-align: center;
+    width: 75%;
+    white-space: pre-wrap;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}

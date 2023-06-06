@@ -39,17 +39,17 @@
     object-fit: cover;
 }
 
-.profileInfo, .profileActions {
+.profileActions, .profileData {
     display: flex;
     flex-direction: column;
     padding: 2rem;
 }
 
-.profileInfo {
+.profileData {
     display: flex;
     flex-direction: column;
     padding: 2rem;
-    width: 400px;
+    width: 700px;
 }
 
 .profile .data p {
@@ -63,59 +63,6 @@
     width: 330px;
 }
 
-.profileMini {
-     margin: 20px;
-     border: var(--gray) 2px solid;
-     background: var(--dark-gray);
-     padding: .75rem 1.25rem;
-     display: flex;
-     gap: 1rem;
-     align-items: center;
-     border-radius: .75rem;
-     color: var(--white);
-     text-decoration: none;
- }
-
-.profileMini img {
-    width: 5rem;
-    aspect-ratio: 1 / 1;
-    border-radius: 9999px;
-    object-fit: cover;
-}
-
-.profileMini .profileInfo {
-    display: flex;
-    flex-direction: column;
-    gap: .25rem;
-}
-
-.profileMini .profileInfo h3 {
-    color: var(--white);
-    font-size: 1.25rem;
-    font-weight: 800;
-    margin: 0;
-}
-
-.profileMini .profileInfo p {
-    color: var(--light-gray2);
-    margin: 0;
-    font-size: .75rem;
-}
-
-.users .profileMini {
-    width: 400px;
-}
-
-.profileMini:active {
-    color: var(--white);
-    text-decoration: none;
-}
-
-.profileMini:hover {
-    color: var(--white);
-    text-decoration: none;
-}
-
 .slash {
     margin-right: 15px;
     margin-left: 15px;
@@ -125,10 +72,10 @@
     .profile {
         flex-direction: column;
         align-items: center;
-        width: 300px;
+        width: 400px;
     }
 
-    .profileInfo {
+    .profileData{
         width: 100%;
         align-items: center;
         justify-content: center;
@@ -164,19 +111,32 @@
         width: 100%;
         object-fit: cover;
     }
+
+    .profileSocials {
+        width: 300px;
+        justify-content: center;
+    }
+}
+
+.profileSocials {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
 }
 
 @media (max-width: 500px) {
-    .users .profileMini {
+    .projects .project {
         width: 300px;
         height: 80px;
     }
 
-    .profileMini img {
+    .project img {
         width: 4rem;
     }
 
-    .profileMini .profileInfo h3 {
+    .project .projectInfo h3 {
         font-size: 0.81rem;
     }
 

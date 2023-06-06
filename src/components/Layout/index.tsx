@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import stylesHeader from './header.module.css'
-import stylesModuleWindow from "./window.module.css";
-import stylesComponents from "@/styles/components.module.css";
-import React, {useState} from "react";
+import stylesModuleWindow from './window.module.css'
+import stylesComponents from '@/styles/components.module.css'
+import React, {useEffect, useState} from "react";
 import {HeaderButton} from "@/components";
+import {getCookie} from "cookies-next";
 
 export type LayoutProps = {
     title?: string;
@@ -30,6 +31,13 @@ export default function Layout({children, title, className}: LayoutProps) {
         setWindowContent(content)
     }
 
+    const [token, setToken] = useState<any>(null)
+
+    useEffect(() => {
+        const token = getCookie("token")
+        setToken(token)
+    }, [])
+
     return (
         <>
             <Head>
@@ -47,11 +55,19 @@ export default function Layout({children, title, className}: LayoutProps) {
             <header className={stylesHeader.header}>
                 <nav>
                     <HeaderButton href="/" icon="home">Главная</HeaderButton>
+                    <HeaderButton href="/blog" icon="newspaper">Блог</HeaderButton>
                 </nav>
                 <nav>
-                    <HeaderButton href="/auth" icon="right-to-bracket">Авторизация</HeaderButton>
-                    <HeaderButton href="/profile/1" icon="user">Профиль</HeaderButton>
-                    <HeaderButton href="/logout" icon="right-from-bracket">Выйти</HeaderButton>
+                    {!token ?
+                        <>
+                            <HeaderButton href="/auth" icon="right-to-bracket">Авторизация</HeaderButton>
+                        </> :
+                        <>
+                            <HeaderButton href="/commas" icon="quote-right">Запятые</HeaderButton>
+                            <HeaderButton href="/settings" icon="gear">Управление</HeaderButton>
+                            <HeaderButton href="/logout" icon="right-from-bracket">Выйти</HeaderButton>
+                        </>
+                    }
                 </nav>
             </header>
             <main className={className ? className : "center flex-column"}>

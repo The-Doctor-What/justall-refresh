@@ -1,7 +1,6 @@
 .text {
     color: var(--light-gray);
     font-weight: bold;
-    text-align: center;
 }
 
 .errorSection {
@@ -10,6 +9,7 @@
     padding: 1rem;
     margin: 1rem;
     width: 400px;
+    text-align: center;
 }
 
 @media (max-width: 530px) {

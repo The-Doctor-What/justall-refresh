@@ -10,7 +10,7 @@
     transition: color 0.2s ease-in-out;
 }
 
-@media (max-width: 530px) {
+@media (max-width: 680px) {
     .headerButtonTitle {
         display: none;
     }
