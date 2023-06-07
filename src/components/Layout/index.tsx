@@ -1,7 +1,5 @@
 import Head from 'next/head'
 import stylesHeader from './header.module.css'
-import stylesModuleWindow from './window.module.css'
-import stylesComponents from '@/styles/components.module.css'
 import React, {useEffect, useState} from "react";
 import {HeaderButton} from "@/components";
 import {getCookie} from "cookies-next";
@@ -19,16 +17,6 @@ export default function Layout({children, title, className}: LayoutProps) {
         title: (title ? title + " | " : "") + (process.env.NEXT_PUBLIC_META_TITLE || "Personal Website"),
         description: process.env.NEXT_PUBLIC_META_DESCRIPTION || "Welcome to my personal website!",
         image: baseUrl + "/avatar.jpg"
-    }
-
-    const [windowOpen, setWindowOpen] = useState(false)
-    const [windowTitle, setWindowTitle] = useState("")
-    const [windowContent, setWindowContent] = useState("")
-
-    function openWindow(title: any, content: any) {
-        setWindowOpen(true)
-        setWindowTitle(title)
-        setWindowContent(content)
     }
 
     const [token, setToken] = useState<any>(null)
@@ -72,23 +60,6 @@ export default function Layout({children, title, className}: LayoutProps) {
             </header>
             <main className={className ? className : "center flex-column"}>
                 {children}
-                {windowOpen && <section className={`${stylesModuleWindow.moduleWindowHolder}`}>
-                    <div className={stylesModuleWindow.moduleWindow}>
-                        <div className={stylesModuleWindow.moduleWindowHeader}>
-                            <p id="module-window-title">{windowTitle}</p>
-                        </div>
-                        <div className={stylesModuleWindow.moduleWindowContent}>
-                            <p id="module-window-message">{windowContent}</p>
-                        </div>
-                        <div className={stylesModuleWindow.moduleWindowFooter}>
-                            <button id="module-window-button" onClick={() => setWindowOpen(false)}
-                                    className={stylesComponents.button}>
-                                <i className="fa-solid fa-xmark" onClick={() => setWindowOpen(false)}></i>
-                                ⠀Закрыть
-                            </button>
-                        </div>
-                    </div>
-                </section>}
             </main>
         </>
     )

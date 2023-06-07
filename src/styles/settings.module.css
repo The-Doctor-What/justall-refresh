@@ -10,13 +10,17 @@
     height: fit-content;
 }
 
-.sections button, .socials button {
+.sections button, .socials button, .sections a {
     width: 100%;
     text-align: left;
 }
 
 .socials button {
     width: 400px;
+}
+
+.sections a {
+    width: 86%;
 }
 
 .section {
@@ -30,7 +34,7 @@
 
 .settingsProject, .settingsProjectPlus {
     margin: 20px;
-    border: var(--gray) 2px solid;
+    border: var(--dark-gray2) 2px solid;
     background: var(--dark-gray);
     padding: .75rem 1.25rem;
     display: flex;

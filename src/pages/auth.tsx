@@ -1,13 +1,14 @@
-import {Button, Layout, Link} from "@/components";
+import {Button, Layout, Link, Window} from "@/components";
 import stylesAuth from "@/styles/auth.module.css";
 import stylesComponents from "@/styles/components.module.css";
-import {useRef} from "react";
+import {useRef, useState} from "react";
 import sha256 from 'crypto-js/sha256';
 import {useRouter} from "next/router";
 import {setCookie} from "cookies-next";
 import {GetServerSideProps} from "next";
 import {checkAuth} from "@/utils/checkAuth";
 import stylesError from "@/styles/error.module.css";
+import {createPortal} from "react-dom";
 
 type Auth = {
     token: any
@@ -31,6 +32,16 @@ export default function AuthPage({token}: Auth) {
                 </section>
             </Layout>
         )
+    }
+
+    const [showModal, setShowModal] = useState(false);
+    const [TitleModal, setTitleModal] = useState("");
+    const [ContextModal, setContextModal] = useState("");
+
+    const window = (title: string, context: string) => {
+        setTitleModal(title)
+        setContextModal(context)
+        setShowModal(true)
     }
 
     return (
@@ -60,7 +71,7 @@ export default function AuthPage({token}: Auth) {
                         await router.push("/");
                     }
 
-                    alert(data.message);
+                    window("Авторизация", data.message)
 
                 }}>
                     <h1>Вход в аккаунт</h1>
@@ -77,6 +88,11 @@ export default function AuthPage({token}: Auth) {
                     </div>
                 </form>
             </section>
+            {showModal && createPortal(
+                <Window title={TitleModal} closeExecute={() => setShowModal(false)}>
+                    {ContextModal}
+                </Window>, document.body
+            )}
         </Layout>
     )
 }

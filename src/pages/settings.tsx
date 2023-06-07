@@ -1,4 +1,4 @@
-import {Button, Layout, Link} from "@/components";
+import {Button, Layout, Link, Window} from "@/components";
 import stylesSettings from "@/styles/settings.module.css";
 import stylesError from "@/styles/error.module.css";
 import {GetServerSideProps} from "next";
@@ -10,6 +10,7 @@ import {getSocials} from "@/utils/getSocials";
 import LinkNext from "next/link";
 import stylesProjects from "@/styles/project.module.css";
 import {getProjects} from "@/utils/getProject";
+import {createPortal} from "react-dom";
 
 type Logout = {
     token: any,
@@ -32,6 +33,15 @@ export default function ControlPage({token, socials, projects}: Logout) {
 
     const [settingsSection, setSettingsSection] = useState(1)
     const [avatarUrl, setAvatarUrl] = useState(null)
+    const [showModal, setShowModal] = useState(false);
+    const [TitleModal, setTitleModal] = useState("");
+    const [ContextModal, setContextModal] = useState("");
+
+    const window = (title: string, context: string) => {
+        setTitleModal(title)
+        setContextModal(context)
+        setShowModal(true)
+    }
 
     const mainSettings = {
         name: useRef<any>(),
@@ -68,7 +78,7 @@ export default function ControlPage({token, socials, projects}: Logout) {
 
         const data = await request.json();
 
-        alert(data.message)
+        window("Обновление данных", data.message)
     }
 
     const changeLogin = async (e: any) => {
@@ -88,7 +98,7 @@ export default function ControlPage({token, socials, projects}: Logout) {
             maxAge: 30 * 24 * 60 * 60,
             path: "/",
         })
-        alert(data.message)
+        window("Смена логина", data.message)
     }
 
     const closeSessions = async (e: any) => {
@@ -99,12 +109,12 @@ export default function ControlPage({token, socials, projects}: Logout) {
             maxAge: 30 * 24 * 60 * 60,
             path: "/",
         })
-        alert(data.message)
+        window("Закрытие сессий", data.message)
     }
 
     const deleteSocial = async (e: any, id: any) => {
         e.preventDefault();
-        const request = await fetch(`/api/deleteSocial`, {
+        const request = await fetch(`/api/social/delete`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -114,7 +124,7 @@ export default function ControlPage({token, socials, projects}: Logout) {
             })
         })
         const data = await request.json();
-        alert(data.message)
+        window("Удаление соц. сети", data.message)
     }
 
     const changePassword = async (e: any) => {
@@ -136,11 +146,11 @@ export default function ControlPage({token, socials, projects}: Logout) {
             maxAge: 30 * 24 * 60 * 60,
             path: "/",
         })
-        alert(data.message)
+        window("Смена пароля", data.message)
     }
     const socialAdd = async (e: any) => {
         e.preventDefault();
-        const request = await fetch(`/api/socialAdd`, {
+        const request = await fetch(`/api/social/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -151,7 +161,7 @@ export default function ControlPage({token, socials, projects}: Logout) {
             })
         })
         const data = await request.json();
-        alert(data.message)
+        window("Подключение соц. сети", data.message)
     }
 
     return (
@@ -311,7 +321,11 @@ export default function ControlPage({token, socials, projects}: Logout) {
                         </LinkNext>
                     </div>)}
             </section>
-
+            {showModal && createPortal(
+                <Window title={TitleModal} closeExecute={() => setShowModal(false)}>
+                    {ContextModal}
+                </Window>, document.body
+            )}
         </Layout>
     )
 }
