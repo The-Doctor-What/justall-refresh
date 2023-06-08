@@ -43,7 +43,6 @@ export default function Layout({children, title, className}: LayoutProps) {
             <header className={stylesHeader.header}>
                 <nav>
                     <HeaderButton href="/" icon="home">Главная</HeaderButton>
-                    <HeaderButton href="/blog" icon="newspaper">Блог</HeaderButton>
                 </nav>
                 <nav>
                     {!token ?

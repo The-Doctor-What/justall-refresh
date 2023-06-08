@@ -70,35 +70,34 @@ export default function HomePage({profile, token, projects, socials}: Home) {
                     Портфолио
                 </LinkNext>
             </div>
-            {projects?.length > 0 ? (
-                    <section className={`center flex-row flex-wrap ${stylesProjects.projects}`} id="projects">
-                        {projects.map((project: any) => (
-                            <LinkNext href={`${project.url}`} key={project.id} className={stylesProjects.project}>
-                                <div className={stylesProjects.projectInfo}>
-                                    <h3><i className={`fa-solid fa-${project.icon}`}></i> {project.name}</h3>
-                                    <p>{project.description}</p>
-                                    <div className={`${stylesProjects.projectTechnologies} flex-row`}>
-                                        {project.technologies ? project.technologies.map((technology: any) => (
-                                            <img src={`/technologies/${technology}.png`} alt={technology} key={technology}/>
-                                        )) : null}
+            <section className={`center flex-row flex-wrap ${stylesProjects.projects}`} id="projects">
+                {projects?.length > 0 ? (<>
+                            {projects.map((project: any) => (
+                                <LinkNext href={`${project.url}`} key={project.id} className={stylesProjects.project}>
+                                    <div className={stylesProjects.projectInfo}>
+                                        <h3><i className={`fa-solid fa-${project.icon}`}></i> {project.name}</h3>
+                                        <p>{project.description}</p>
+                                        <div className={`${stylesProjects.projectTechnologies} flex-row`}>
+                                            {project.technologies ? project.technologies.map((technology: any) => (
+                                                <img src={`/technologies/${technology}.png`} alt={technology}
+                                                     key={technology}/>
+                                            )) : null}
+                                        </div>
                                     </div>
-                                </div>
+                                </LinkNext>
+                            ))}
+                            <LinkNext href="/project/create" className={stylesProjects.projectPlus}>
+                                <i className="fa-solid fa-circle-plus"></i>
                             </LinkNext>
-                        ))}
+                        </>
+                    ) :
+                    <section className={`${stylesError.errorSection} center flex-column`}>
+                        <h1>Не найдено ни одного проекта или не удалось получить данные</h1>
+                        <p className={stylesError.text}>Попробуйте перезагрузить страницу</p>
+                        <Link href="/" icon="rotate-right">Перезагрузить</Link>
                     </section>
-
-                ) :
-                <section className={`${stylesError.errorSection} center flex-column`}>
-                    <h1>Не найдено ни одного проекта или не удалось получить данные</h1>
-                    <p className={stylesError.text}>Попробуйте перезагрузить страницу</p>
-                    <Link href="/" icon="rotate-right">Перезагрузить</Link>
-                </section>
-            }
-            {token ? (
-                <LinkNext href="/project/create" className={stylesProjects.projectPlus}>
-                    <i className="fa-solid fa-circle-plus"></i>
-                </LinkNext>
-            ) : null}
+                }
+            </section>
         </Layout>
     )
 }
