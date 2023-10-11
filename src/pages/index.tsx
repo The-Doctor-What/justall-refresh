@@ -58,11 +58,7 @@ export default function HomePage({profile, token, projects, socials}: Home) {
                     </div>
                 </div>
                 <div className={stylesProfile.profileActions}>
-                    {token ? (
-                        <>
-                            <Link href={`/settings`} icon="pen-to-square">Редактировать</Link>
-                        </>
-                    ) : null}
+                    {token && (<Link href={`/settings`} icon="pen-to-square">Редактировать</Link>)}
                 </div>
             </section>
             <div className={stylesProfile.profileTitle}>
@@ -86,9 +82,11 @@ export default function HomePage({profile, token, projects, socials}: Home) {
                                     </div>
                                 </LinkNext>
                             ))}
-                            <LinkNext href="/project/create" className={stylesProjects.projectPlus}>
-                                <i className="fa-solid fa-circle-plus"></i>
-                            </LinkNext>
+                            {token && (
+                                <LinkNext href="/project/create" className={stylesProjects.projectPlus}>
+                                    <i className="fa-solid fa-circle-plus"></i>
+                                </LinkNext>
+                            )}
                         </>
                     ) :
                     <section className={`${stylesError.errorSection} center flex-column`}>

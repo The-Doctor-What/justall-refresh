@@ -50,6 +50,7 @@ export default function Layout({children, title, className}: LayoutProps) {
                             <HeaderButton href="/auth" icon="right-to-bracket">Авторизация</HeaderButton>
                         </> :
                         <>
+                            <HeaderButton href="/twork" icon="toolbox">Шпаргалка</HeaderButton>
                             <HeaderButton href="/commas" icon="quote-right">Запятые</HeaderButton>
                             <HeaderButton href="/settings" icon="gear">Управление</HeaderButton>
                             <HeaderButton href="/logout" icon="right-from-bracket">Выйти</HeaderButton>

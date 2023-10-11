@@ -1,0 +1,13 @@
+.cheat {
+    display: flex;
+    flex-direction: column;
+    width: 900px;
+    gap: 10px;
+    margin: 10px;
+}
+
+@media (max-width: 900px) {
+    .cheat {
+        width: 100%;
+    }
+}
