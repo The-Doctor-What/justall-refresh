@@ -8,7 +8,6 @@ import stylesComponents from "@/styles/components.module.css";
 import {setCookie} from "cookies-next";
 import {getSocials} from "@/utils/getSocials";
 import LinkNext from "next/link";
-import stylesProjects from "@/styles/project.module.css";
 import {getProjects} from "@/utils/getProject";
 import {createPortal} from "react-dom";
 

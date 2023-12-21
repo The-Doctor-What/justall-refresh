@@ -1,14 +1,15 @@
 import Head from 'next/head'
-import stylesHeader from './header.module.css'
 import React, {useEffect, useState} from "react";
-import {HeaderButton} from "@/components";
 import {getCookie} from "cookies-next";
+import {Inter} from "next/font/google";
 
 export type LayoutProps = {
     title?: string;
     children?: React.ReactNode;
     className?: string;
 }
+
+const inter = Inter({subsets: ['latin']})
 
 export default function Layout({children, title, className}: LayoutProps) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://example.com";
@@ -39,25 +40,7 @@ export default function Layout({children, title, className}: LayoutProps) {
                 <meta property="og:description" content={meta.description}/>
                 <meta property="og:image" content={meta.image}/>
             </Head>
-            <></>
-            <header className={stylesHeader.header}>
-                <nav>
-                    <HeaderButton href="/" icon="home">Главная</HeaderButton>
-                </nav>
-                <nav>
-                    {!token ?
-                        <>
-                            <HeaderButton href="/auth" icon="right-to-bracket">Авторизация</HeaderButton>
-                        </> :
-                        <>
-                            <HeaderButton href="/commas" icon="quote-right">Запятые</HeaderButton>
-                            <HeaderButton href="/settings" icon="gear">Управление</HeaderButton>
-                            <HeaderButton href="/logout" icon="right-from-bracket">Выйти</HeaderButton>
-                        </>
-                    }
-                </nav>
-            </header>
-            <main className={className ? className : "center flex-column"}>
+            <main className={`${inter.className} md:flex md:flex-col md:items-center md:justify-center md:w-full md:h-screen`}>
                 {children}
             </main>
         </>
